@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    /* This tells Jenkins to automatically pull and setup NodeJS version 18 */
+    tools {
+        nodejs 'node18' // Make sure this matches your Jenkins global tool name (usually node, node18, or NodeJS)
+    }
+
     environment {
         DOCKER_IMAGE = 'hotel-booking-frontend'
     }
@@ -16,6 +21,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 echo 'Installing npm packages...'
+                /* We run directly in the root directory now */
                 sh 'npm install'
             }
         }
