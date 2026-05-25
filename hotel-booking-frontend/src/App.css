@@ -1,38 +1,140 @@
-.App {
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  background-color: #f8fafc;
+  color: #1e293b;
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+.header {
   text-align: center;
+  margin-bottom: 50px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header h1 {
+  font-size: 2.6rem;
+  color: #0f172a;
+  margin-bottom: 8px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header p {
+  font-size: 1.1rem;
+  color: #64748b;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.notification {
+  background-color: #f0fdf4;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+  padding: 14px 24px;
+  border-radius: 8px;
+  margin-bottom: 35px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.room-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.room-card {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  padding: 26px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: space-between;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.room-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+}
+
+.card-disabled {
+  opacity: 0.8;
+}
+
+.room-status-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.room-status-badge[data-status="Available"] {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.room-status-badge[data-status="Booked"] {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.room-status-badge[data-status="Sold Out"] {
+  background-color: #f1f5f9;
+  color: #475569;
+}
+
+.room-card h3 {
+  margin: 15px 0 10px 0;
+  font-size: 1.4rem;
+  color: #0f172a;
+  max-width: 80%;
+}
+
+.room-price {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #0284c7;
+  margin: 0 0 15px 0;
+}
+
+.room-amenities {
+  color: #475569;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.room-amenities span {
+  font-weight: 600;
+  color: #334155;
+}
+
+.btn-reserve {
+  background-color: #0284c7;
   color: white;
+  border: none;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s ease;
 }
 
-.App-link {
-  color: #61dafb;
+.btn-reserve:hover {
+  background-color: #0369a1;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btn-reserve:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
 }
