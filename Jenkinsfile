@@ -1,27 +1,31 @@
 pipeline {
     agent any
-    
+
+    tools {
+        nodejs 'node18'
+    }
+
+    environment {
+        DOCKER_IMAGE = 'hotel-booking-frontend'
+    }
+
     stages {
-        stage('Checkout') {
+        stage('Install Dependencies') {
             steps {
-                checkout scm
-            }
-        }
-        
-        stage('Install and Build') {
-            steps {
-                // Navigate into the parent folder, then the react folder
-                dir('app-deployment/my-react-app') {
+                echo 'Stepping into my-react-app folder to install packages...'
+                /* This tells Jenkins to change directories into the folder where package.json actually lives */
+                dir('my-react-app') {
                     sh 'npm install'
-                    sh 'npm run build'
                 }
             }
         }
-        
-        stage('Archive') {
+
+        stage('Build Frontend') {
             steps {
-                // Archive from the deep path
-                archiveArtifacts artifacts: 'app-deployment/my-react-app/build/**', fingerprint: true
+                echo 'Building React application...'
+                dir('my-react-app') {
+                    sh 'npm run build'
+                }
             }
         }
     }
